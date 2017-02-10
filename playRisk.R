@@ -41,14 +41,18 @@ playRisk <- function( attack.dice = 3, # num. of attack dice
 
   }
   
+  attacker.casualties <- total.casualties - attacker.total.kills
+
+  
   # total attacker kills / total possible kills = % success for attacker
   percent.attacker.kills <- (attacker.total.kills / total.casualties)
   #format as percent
   percent.attacker.kills <-   paste0(formatC(100 * percent.attacker.kills, format = "f", digits = 2), "%")
+  
+  # kills:deaths ratio
+  kill.death.ratio <- round( ( attacker.total.kills / attacker.casualties ), digits = 2)
 
   
-  attacker.casualties <- total.casualties - attacker.total.kills
-  
-  return (  data.frame(attacker.total.kills, attacker.casualties, percent.attacker.kills)  )
+  return (  data.frame(attacker.total.kills, attacker.casualties, percent.attacker.kills, kill.death.ratio)  )
   
 }
